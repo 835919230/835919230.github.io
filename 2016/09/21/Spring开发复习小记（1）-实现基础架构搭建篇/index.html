@@ -1,0 +1,538 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+<link href="/fonts/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！实现一个不需要写Web.xml的Web App这时候需要实现一个抽象类AbstractAnnotationConfigDispatcherServletInitializer，并覆盖它的三个方法：
+
+getRootConfigClasses()
+getServletConfigClasses()
+getServletMappings">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring开发复习小记（1）-实现基础架构搭建篇">
+<meta property="og:url" content="http://yoursite.com/2016/09/21/Spring开发复习小记（1）-实现基础架构搭建篇/index.html">
+<meta property="og:site_name" content="SimonHC">
+<meta property="og:description" content="首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！实现一个不需要写Web.xml的Web App这时候需要实现一个抽象类AbstractAnnotationConfigDispatcherServletInitializer，并覆盖它的三个方法：
+
+getRootConfigClasses()
+getServletConfigClasses()
+getServletMappings">
+<meta property="og:updated_time" content="2016-09-21T01:19:29.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring开发复习小记（1）-实现基础架构搭建篇">
+<meta name="twitter:description" content="首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！实现一个不需要写Web.xml的Web App这时候需要实现一个抽象类AbstractAnnotationConfigDispatcherServletInitializer，并覆盖它的三个方法：
+
+getRootConfigClasses()
+getServletConfigClasses()
+getServletMappings">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Spring开发复习小记（1）-实现基础架构搭建篇 | SimonHC </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">SimonHC</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring开发复习小记（1）-实现基础架构搭建篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-21T09:18:47+08:00" content="2016-09-21">
+              2016-09-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！"><a href="#首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！" class="headerlink" title="首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！"></a>首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！</h6><h2 id="实现一个不需要写Web-xml的Web-App"><a href="#实现一个不需要写Web-xml的Web-App" class="headerlink" title="实现一个不需要写Web.xml的Web App"></a>实现一个不需要写Web.xml的Web App</h2><p>这时候需要实现一个抽象类<code>AbstractAnnotationConfigDispatcherServletInitializer</code>，<br>并覆盖它的三个方法：</p>
+<ul>
+<li>getRootConfigClasses()</li>
+<li>getServletConfigClasses()</li>
+<li>getServletMappings()</li>
+</ul>
+<p>具体如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bootstrap</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;RootConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[]&#123;ServletConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个时候我们就需要去创建两个Class（至少我是这样的）,分别是<code>RootConfig</code>跟<code>ServletConfig</code>。<br>在RootConfig里边，我们可以去定义一些跟Spring Web模块关系不是太紧密的Bean，就比如DataSource或者是HibernateTemplate这种与数据库相关的Bean。<br>在ServletConfig里边我们可以去定义我们需要的bean,就比如ViewResolver跟MultipartResolver。<br>在这里晒出ViewResolver的源码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.hc.web"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</div><div class="line">    Logger log = Logger.getLogger(<span class="keyword">this</span>.getClass());</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        InternalResourceViewResolver viewResolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line">        viewResolver.setPrefix(<span class="string">"/WEB-INF/views/"</span>);</div><div class="line">        viewResolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line">        viewResolver.setExposeContextBeansAsAttributes(<span class="keyword">true</span>);</div><div class="line">        log.debug(<span class="string">"ViewResolver启动"</span>);</div><div class="line">        <span class="keyword">return</span> viewResolver;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        CommonsMultipartResolver multipartResolver = <span class="keyword">new</span> CommonsMultipartResolver();</div><div class="line">        multipartResolver.setUploadTempDir(<span class="keyword">new</span> FileSystemResource(<span class="string">"/tmp/hc/uploads"</span>));</div><div class="line">        multipartResolver.setMaxUploadSize(<span class="number">2097152L</span>);</div><div class="line">        multipartResolver.setMaxInMemorySize(<span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> multipartResolver;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>&#123;</div><div class="line">        configurer.enable();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)这个方法就相当于我们在.xml文件里面写的</p>
+<mvc:enablehandlermapping>
+
+<p>我们还可以看到，ViewResolver和MuiltiPartResolver都有自己的实现类，在上面我选择的是<code>InternalResourceViewResolver</code>，和<code>CommonsMultipartResolver</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"com.hc"</span>&#125;,</div><div class="line">        excludeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RootConfig</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="上传文件小记"><a href="#上传文件小记" class="headerlink" title="上传文件小记"></a>上传文件小记</h3><p>在这里，我实现的是上传多个文件</p>
+<p>先上代码</p>
+<p>这是一个Controller</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">l</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span>MultipartFile[] files) <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; files.length; i++) &#123;</div><div class="line">        MultipartFile file = files[i];</div><div class="line">        String filename = file.getOriginalFilename();</div><div class="line">        File f = <span class="keyword">new</span> File(<span class="string">"/data/"</span>+filename);</div><div class="line">        <span class="keyword">if</span> (f.exists())<span class="keyword">continue</span>;</div><div class="line">        FileUtils.writeByteArrayToFile(f,file.getBytes());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">"upload"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是对应的网页代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;form action="/upload" method="post" enctype="multipart/form-data"&gt;</div><div class="line">        &lt;input type="file" name="file" multiple/&gt;</div><div class="line">        &lt;input type="submit" value="上传"/&gt;</div><div class="line">    &lt;/form&gt;</div></pre></td></tr></table></figure></p>
+<p>上传的参数是“file”，然后我启用了multiple属性，我们就可以去选择多个图片上传，在Controller处理上传的方法上我标注了上传的参数名，对应的Java实体却是一个Multiipart<strong>数组</strong>，我还选用了Apache commons包下的FileUtils，简单便捷。</p>
+<h4 id="上传多个文件遇到的“坑”"><a href="#上传多个文件遇到的“坑”" class="headerlink" title="上传多个文件遇到的“坑”"></a>上传多个文件遇到的“坑”</h4><ul>
+<li>不要用byte[] 作入参<br>  用了之后，选择多个文件，最后只保留了第一个选中了。<br>-或者这样<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(@RequestPart(<span class="string">"file"</span>)</span>Part[] parts) <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; parts.length; i++) &#123;</div><div class="line">            Part part = parts[i];</div><div class="line">            String fileName = part.getSubmittedFileName();</div><div class="line">            part.write(<span class="string">"/data/"</span>+fileName);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">"upload"</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这也是会报错的，500</p>
+<p>为什么呢，注意这里是500，那么就是我自己的问题了。找了好久，才发现是MultipartResolver选择上的错误。</p>
+<p>刚刚我选择的是CommonsMultipartResolver，要想成功，就需要使用<code>StandardMultipartResolver</code>了</p>
+<p>要使用StandardMultipartResolver，我们需要在刚刚的Bootstrap类上重写一个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">customizeRegistration</span><span class="params">(ServletRegistration.Dynamic registration)</span> </span>&#123;</div><div class="line">    registration.setMultipartConfig(<span class="keyword">new</span> MultipartConfigElement(<span class="string">"/"</span>,<span class="number">2097152L</span>,<span class="number">4194304L</span>,<span class="number">0</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并修改ServletConfig类中得到MultipartResolver的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        StandardServletMultipartResolver multipartResolver = <span class="keyword">new</span> StandardServletMultipartResolver();</div><div class="line"><span class="comment">//        multipartResolver.setUploadTempDir(new FileSystemResource("/tmp/hc/uploads"));</span></div><div class="line"><span class="comment">//        multipartResolver.setMaxUploadSize(2097152L);</span></div><div class="line"><span class="comment">//        multipartResolver.setMaxInMemorySize(4096);</span></div><div class="line">        <span class="keyword">return</span> multipartResolver;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这样原来报错的那段代码就可以用了呢！^_^</p>
+<p>但是，现在上传中文名文件会<strong>出现乱码</strong>，如果不希望出现乱码（肯定不希望啊），就在实现了AbstractAnnotationConfigDispatcherServletInitializer 这个类的Bootstrap类上重写如下方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Filter[] getServletFilters() &#123;</div><div class="line">        CharacterEncodingFilter encodingFilter = <span class="keyword">new</span> CharacterEncodingFilter(<span class="string">"utf-8"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Filter[]&#123;encodingFilter&#125;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>就是增加一个CharacterEncodingFilter，这个Filter会把字符集修改为我指定的utf-8</p>
+</mvc:enablehandlermapping>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/21/Spring开发复习小记（2）-与MyBatis集成篇/" rel="prev" title="Spring开发复习小记（2）-与MyBatis集成">
+                Spring开发复习小记（2）-与MyBatis集成 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/touxiang.jpg"
+               alt="何肸" />
+          <p class="site-author-name" itemprop="name">何肸</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！"><span class="nav-number">1.</span> <span class="nav-text">首语：Spring实战（第四版）里的上传文件Demo真的是好坑啊！</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现一个不需要写Web-xml的Web-App"><span class="nav-number"></span> <span class="nav-text">实现一个不需要写Web.xml的Web App</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件小记"><span class="nav-number"></span> <span class="nav-text">上传文件小记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上传多个文件遇到的“坑”"><span class="nav-number"></span> <span class="nav-text">上传多个文件遇到的“坑”</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">何肸</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
